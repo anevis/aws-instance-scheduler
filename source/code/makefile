@@ -14,6 +14,11 @@
 # version number
 version=`cat version.txt`
 
+# region that cfn will use when deployed (suffixed to bucket name)
+ifndef bucket_region
+bucket_region=eu-west-2
+endif
+
 # bucket name to deploy to
 ifndef bucket
 bucket=instance-scheduler-deploy
@@ -24,7 +29,7 @@ ifndef prefix
 prefix = instance-scheduler/$(version)/
 endif
 
-s3bucket=s3://$(bucket)/
+s3bucket=s3://$(bucket)-$(bucket_region)/
 
 s3http='https:\/\/s3-eu-west-1.amazonaws.com\/$(bucket)'
 
